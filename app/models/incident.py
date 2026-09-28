@@ -24,6 +24,12 @@ class Incident(Base):
         cascade="all,delete-orphan"
         )
 
+    evidences = relationship(
+        "Evidence",
+        back_populates="incident",
+        cascade="all,delete-orphan"
+    )
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     repository: Mapped[str] = mapped_column(String(255), nullable=False)
     commit_id: Mapped[str] = mapped_column(String(255), nullable=False)

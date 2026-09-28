@@ -6,12 +6,12 @@ from app.schemas.incident import IncidentCreate, IncidentResponse , IncidentStat
 from sqlalchemy.orm import Session
 from app.models.investigation import Investigation
 from app.schemas.investigation import InvestigationCreate , InvestigationResponse
+from app.models.evidence import Evidence
+from app.schemas.evidence import EvidenceCreate,EvidenceResponse
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
-
 
 @app.get("/health")
 def health_check():
@@ -150,3 +150,57 @@ def get_investigations(
             detail="Investiagtions not found"
 )
     return investigations 
+
+
+
+@app.post("/incidents/{incident_id}/evidence",
+          response_model=EvidenceResponse)
+def create_evidence(
+    evidence : EvidenceCreate,
+    incident_id : int,
+    db : Session = Depends(get_db)
+):
+    incident = db.query(Incident).filter(
+        Incident.id == incident_id
+    ).first()
+
+    if incident is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Incident does not exist"
+        )
+
+    db_evidence = Evidence(
+        incident_id = incident_id,
+        source = evidence.source,
+        content =evidence.content
+    )
+
+    db.add(db_evidence)
+    db.commit()
+    db.refresh(db_evidence)
+
+    return db_evidence
+
+
+
+@app.get("/incidents/{incident_id}/evidences",
+         response_model=list[EvidenceResponse])
+def get_evidences(
+    incident_id : int,
+    db : Session = Depends(get_db) 
+):
+    evidences = db.query(Evidence).filter(
+        Evidence.incident_id == incident_id
+    ).all()
+
+
+    if not evidences:
+        raise HTTPException(
+            status_code=404,
+            detail="No evidence found for this incident"
+        )
+
+    return evidences
+    
+
