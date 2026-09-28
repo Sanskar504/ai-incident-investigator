@@ -2,14 +2,10 @@ from datetime import datetime
 from enum import Enum
 
 from sqlalchemy import DateTime, Enum as SQLEnum, Integer, String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
 
-
-
-class Base(DeclarativeBase):
-    pass
 
 
 class IncidentStatus(str, Enum):
@@ -22,12 +18,15 @@ class IncidentStatus(str, Enum):
 class Incident(Base):
     __tablename__ = "incidents"
 
+    investigations = relationship(
+        "Investigation",
+        back_populates="incident",
+        cascade="all,delete-orphan"
+        )
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-
     repository: Mapped[str] = mapped_column(String(255), nullable=False)
-
     commit_id: Mapped[str] = mapped_column(String(255), nullable=False)
-
     build_id: Mapped[int] = mapped_column(Integer, nullable=False)
 
     status: Mapped[IncidentStatus] = mapped_column(
@@ -41,3 +40,4 @@ class Incident(Base):
         default=datetime.utcnow,
         nullable=False,
     )
+
