@@ -8,6 +8,7 @@ from app.models.investigation import Investigation
 from app.schemas.investigation import InvestigationCreate , InvestigationResponse
 from app.models.evidence import Evidence
 from app.schemas.evidence import EvidenceCreate,EvidenceResponse
+from app.services.evidence_service import save_log_evidence
 
 Base.metadata.create_all(bind=engine)
 
@@ -203,4 +204,32 @@ def get_evidences(
 
     return evidences
     
+
+@app.post("/incidents/{incident_id}/collect_log_evidence",response_model=EvidenceResponse)
+def collect_log_evidence_for_incident(
+    incident_id : int,
+    log_file_path : str,
+    db : Session = Depends(get_db)
+):
+
+    incident = db.query(Incident).filter(
+        Incident.id == incident_id
+    ).first()
+
+
+    if incident is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Incident not found"
+        )
+
+    return save_log_evidence(
+        db = db,
+        incident_id = incident_id,
+        log_file_path = log_file_path
+    )
+
+
+
+
 

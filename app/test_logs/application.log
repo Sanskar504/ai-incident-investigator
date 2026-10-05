@@ -1,0 +1,4 @@
+2026-10-04 20:10:12 INFO Application started
+2026-10-04 20:10:15 INFO Connecting to database
+2026-10-04 20:10:16 ERROR Database connection failed
+2026-10-04 20:10:16 ERROR Connection refused on port 5432
