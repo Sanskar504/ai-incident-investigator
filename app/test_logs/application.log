@@ -1,4 +1,181 @@
-2026-10-04 20:10:12 INFO Application started
-2026-10-04 20:10:15 INFO Connecting to database
-2026-10-04 20:10:16 ERROR Database connection failed
-2026-10-04 20:10:16 ERROR Connection refused on port 5432
+2026-10-06 09:00:01 INFO Application starting
+2026-10-06 09:00:02 INFO Loading application configuration
+2026-10-06 09:00:03 INFO Configuration loaded successfully
+2026-10-06 09:00:04 INFO Initializing database connection
+2026-10-06 09:00:05 INFO Connecting to PostgreSQL
+2026-10-06 09:00:06 INFO Database connection established
+2026-10-06 09:00:07 INFO Running database migrations
+2026-10-06 09:00:08 INFO Database migrations completed
+2026-10-06 09:00:09 INFO Starting background workers
+2026-10-06 09:00:10 INFO Worker-1 started
+2026-10-06 09:00:10 INFO Worker-2 started
+2026-10-06 09:00:11 INFO Application started successfully
+
+2026-10-06 09:01:15 INFO Received request GET /api/incidents
+2026-10-06 09:01:15 INFO Fetching incidents from database
+2026-10-06 09:01:15 INFO Retrieved 12 incidents
+2026-10-06 09:01:15 INFO Request completed with status 200
+
+2026-10-06 09:02:20 INFO Received request POST /api/incidents
+2026-10-06 09:02:20 INFO Validating incident payload
+2026-10-06 09:02:20 INFO Incident payload validated
+2026-10-06 09:02:21 INFO Creating incident in database
+2026-10-06 09:02:21 INFO Incident created successfully with id=13
+2026-10-06 09:02:21 INFO Request completed with status 201
+
+2026-10-06 09:03:10 INFO Starting scheduled health check
+2026-10-06 09:03:11 INFO Database health check passed
+2026-10-06 09:03:11 INFO Redis health check passed
+2026-10-06 09:03:11 INFO External API health check passed
+2026-10-06 09:03:12 INFO Health check completed
+
+2026-10-06 09:05:30 INFO Received request GET /api/investigations/13
+2026-10-06 09:05:30 INFO Loading investigation for incident 13
+2026-10-06 09:05:31 WARNING Investigation record is missing optional metadata
+2026-10-06 09:05:31 INFO Continuing investigation request
+2026-10-06 09:05:31 INFO Request completed with status 200
+
+2026-10-06 09:08:45 INFO Received request POST /api/incidents/13/evidence
+2026-10-06 09:08:45 INFO Validating evidence
+2026-10-06 09:08:45 INFO Saving evidence to database
+2026-10-06 09:08:46 INFO Evidence saved successfully
+
+2026-10-06 09:10:12 INFO Starting background evidence collector
+2026-10-06 09:10:12 INFO Collecting application logs
+2026-10-06 09:10:13 INFO Collecting Docker logs
+2026-10-06 09:10:13 INFO Collecting GitHub metadata
+2026-10-06 09:10:14 INFO Evidence collection completed
+
+2026-10-06 09:12:05 INFO Received request POST /api/incidents/14
+2026-10-06 09:12:05 INFO Validating request
+2026-10-06 09:12:05 INFO Creating incident
+2026-10-06 09:12:06 ERROR Database connection failed
+2026-10-06 09:12:06 ERROR could not connect to server: Connection refused
+2026-10-06 09:12:06 WARNING Database connection retry scheduled
+2026-10-06 09:12:07 INFO Retrying database connection
+2026-10-06 09:12:08 INFO Database connection restored
+2026-10-06 09:12:08 INFO Request completed with status 201
+
+2026-10-06 09:15:00 INFO Scheduled cleanup started
+2026-10-06 09:15:01 INFO Removing expired sessions
+2026-10-06 09:15:02 INFO Removed 25 expired sessions
+2026-10-06 09:15:02 INFO Cleanup completed
+
+2026-10-06 09:18:22 INFO Received request GET /api/incidents/14
+2026-10-06 09:18:22 INFO Loading incident from database
+2026-10-06 09:18:22 INFO Incident found
+2026-10-06 09:18:22 INFO Request completed with status 200
+
+2026-10-06 09:20:15 INFO Starting report generation
+2026-10-06 09:20:16 INFO Loading incident data
+2026-10-06 09:20:17 INFO Loading investigation data
+2026-10-06 09:20:18 INFO Loading evidence data
+2026-10-06 09:20:19 INFO Generating report
+2026-10-06 09:20:20 INFO Report generated successfully
+
+2026-10-06 09:25:30 INFO Received request POST /api/investigations/14
+2026-10-06 09:25:30 INFO Starting investigation
+2026-10-06 09:25:31 INFO Loading evidence
+2026-10-06 09:25:31 INFO Evidence count: 8
+2026-10-06 09:25:32 ERROR Failed to process evidence
+2026-10-06 09:25:32 ERROR Unexpected response from evidence parser
+2026-10-06 09:25:32 WARNING Investigation aborted
+2026-10-06 09:25:33 INFO Investigation retry scheduled
+
+2026-10-06 09:30:00 INFO Investigation retry started
+2026-10-06 09:30:01 INFO Loading previous investigation state
+2026-10-06 09:30:02 INFO Previous investigation state loaded
+2026-10-06 09:30:03 INFO Reprocessing evidence
+2026-10-06 09:30:04 INFO Evidence processing completed
+2026-10-06 09:30:05 INFO Investigation completed successfully
+
+2026-10-06 09:35:10 INFO Received request GET /api/health
+2026-10-06 09:35:10 INFO Health check passed
+2026-10-06 09:35:10 INFO Request completed with status 200
+
+2026-10-06 09:40:12 INFO Starting scheduled GitHub synchronization
+2026-10-06 09:40:13 INFO Fetching repository metadata
+2026-10-06 09:40:14 INFO Fetching latest commit
+2026-10-06 09:40:15 INFO Repository synchronization completed
+
+2026-10-06 09:45:20 INFO Received webhook from GitHub
+2026-10-06 09:45:20 INFO Processing push event
+2026-10-06 09:45:21 INFO Repository: ai-incident-investigator
+2026-10-06 09:45:21 INFO Commit: a82f91d
+2026-10-06 09:45:22 INFO Starting CI pipeline
+
+2026-10-06 09:46:00 INFO Jenkins build started
+2026-10-06 09:46:10 INFO Installing dependencies
+2026-10-06 09:46:20 INFO Running unit tests
+2026-10-06 09:46:30 INFO 124 tests passed
+2026-10-06 09:46:31 INFO Building Docker image
+2026-10-06 09:46:45 INFO Docker image built successfully
+2026-10-06 09:46:46 INFO Jenkins build completed successfully
+
+2026-10-06 09:47:00 INFO Deploying application
+2026-10-06 09:47:01 INFO Stopping previous container
+2026-10-06 09:47:02 INFO Starting new container
+2026-10-06 09:47:03 INFO Container started
+2026-10-06 09:47:04 ERROR Application failed during startup
+2026-10-06 09:47:04 ERROR Database connection refused
+2026-10-06 09:47:04 ERROR PostgreSQL server is unreachable at localhost:5432
+2026-10-06 09:47:05 WARNING Container health check failed
+2026-10-06 09:47:05 INFO Container restart scheduled
+2026-10-06 09:47:10 INFO Restarting application container
+2026-10-06 09:47:11 ERROR Application failed during startup
+2026-10-06 09:47:11 ERROR Database connection refused
+2026-10-06 09:47:11 ERROR PostgreSQL server is unreachable at localhost:5432
+2026-10-06 09:47:12 ERROR Container exited with status code 1
+2026-10-06 09:47:12 WARNING Deployment failed
+
+2026-10-06 09:50:00 INFO Incident automatically created
+2026-10-06 09:50:00 INFO Incident ID: 15
+2026-10-06 09:50:01 INFO Starting automated evidence collection
+2026-10-06 09:50:01 INFO Collecting application logs
+2026-10-06 09:50:02 INFO Collecting Docker logs
+2026-10-06 09:50:02 INFO Collecting Jenkins logs
+2026-10-06 09:50:03 INFO Collecting GitHub commit information
+2026-10-06 09:50:04 INFO Evidence collection in progress
+
+2026-10-06 09:50:05 ERROR Evidence collection failed
+2026-10-06 09:50:05 ERROR Failed to retrieve Jenkins console output
+2026-10-06 09:50:05 WARNING Continuing with partial evidence
+2026-10-06 09:50:06 INFO Application logs collected successfully
+2026-10-06 09:50:06 INFO Docker logs collected successfully
+
+2026-10-06 09:55:00 INFO Starting incident investigation
+2026-10-06 09:55:01 INFO Loading collected evidence
+2026-10-06 09:55:02 INFO Analyzing application logs
+2026-10-06 09:55:03 INFO Analyzing Docker logs
+2026-10-06 09:55:04 INFO Analyzing Jenkins logs
+2026-10-06 09:55:05 INFO Comparing GitHub commit changes
+2026-10-06 09:55:06 WARNING GitHub evidence unavailable
+2026-10-06 09:55:07 INFO Continuing investigation
+
+2026-10-06 09:55:10 ERROR Investigation engine failed
+2026-10-06 09:55:10 ERROR Unable to correlate evidence
+2026-10-06 09:55:10 ERROR Missing required commit metadata
+2026-10-06 09:55:11 WARNING Investigation marked as incomplete
+
+2026-10-06 10:00:00 INFO System health check started
+2026-10-06 10:00:01 INFO Database connection established
+2026-10-06 10:00:02 INFO Redis connection established
+2026-10-06 10:00:03 INFO All services healthy
+2026-10-06 10:00:04 INFO Health check completed
+
+2026-10-06 10:05:15 INFO New deployment detected
+2026-10-06 10:05:16 INFO Pulling Docker image
+2026-10-06 10:05:20 INFO Docker image pulled
+2026-10-06 10:05:21 INFO Starting container
+2026-10-06 10:05:22 INFO Container started
+2026-10-06 10:05:23 INFO Waiting for health check
+2026-10-06 10:05:24 INFO Health check passed
+2026-10-06 10:05:25 INFO Deployment completed successfully
+
+2026-10-06 10:10:00 INFO Application shutting down
+2026-10-06 10:10:01 INFO Stopping background workers
+2026-10-06 10:10:02 INFO Worker-1 stopped
+2026-10-06 10:10:02 INFO Worker-2 stopped
+2026-10-06 10:10:03 INFO Closing database connection
+2026-10-06 10:10:04 INFO Database connection closed
+2026-10-06 10:10:05 INFO Application shutdown completed
