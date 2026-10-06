@@ -174,7 +174,10 @@ def create_evidence(
     db_evidence = Evidence(
         incident_id = incident_id,
         source = evidence.source,
-        content =evidence.content
+        content =evidence.content,
+        message = evidence.message,
+        timestamp = evidence.timestamp,
+        severity = evidence.severity
     )
 
     db.add(db_evidence)

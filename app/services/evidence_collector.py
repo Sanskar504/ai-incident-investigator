@@ -35,13 +35,13 @@ def collect_log_evidence(incident_id,log_file_path):
     errors = error_line.split()
 
     timestamp = errors[0] + " " + errors[1]
-    serverity = errors[2]
+    severity = errors[2]
     message = " ".join(errors[3:])
     
 
     return {
         "source" : "application_logs",
-        "serverity" : serverity,
+        "severity" : severity,
         "message" : message,
         "timestamp" : timestamp,
         "content" : content,

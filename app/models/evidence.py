@@ -32,6 +32,21 @@ class Evidence(Base):
         String,
         nullable=False
     )
+
+    timestamp : Mapped[datetime] = mapped_column(
+        DateTime, 
+        nullable=False
+    )
+
+    message : Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+
+    severity : Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
     
     created_at : Mapped[datetime] = mapped_column(
         DateTime,

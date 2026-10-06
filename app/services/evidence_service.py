@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy.orm import Session
 
 from app.models.evidence import Evidence
@@ -17,7 +19,14 @@ def save_log_evidence(
     db_evidence = Evidence(
         incident_id=evidence_data["incident_id"],
         source=evidence_data["source"],
-        content=evidence_data["content"]
+        content=evidence_data["content"],
+        message=evidence_data["message"],
+        timestamp = datetime.strptime(
+        evidence_data["timestamp"],
+        "%Y-%m-%d %H:%M:%S"
+    ),
+        severity=evidence_data["severity"]
+
     )
 
     db.add(db_evidence)
